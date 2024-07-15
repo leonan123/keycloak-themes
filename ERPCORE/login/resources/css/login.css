@@ -1,0 +1,354 @@
+@font-face {
+  font-family: 'UltimaPro';
+  src: url('../fonts/ultima-pro/UltimaPro-Bold_0.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UltimaPro';
+  src: url('../fonts/ultima-pro/UltimaPro.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa';
+  src: url('../fonts/nexa/nexa-bold.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa';
+  src: url('../fonts/nexa/nexa-light.otf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa';
+  src: url('../fonts/nexa/nexa-regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+:root { 
+  font-size: clamp(0.875rem, 0.4583rem + 1.3333vw, 1.125rem);
+  --padding-screen-inline: 1rem;
+  --max-screen-width: calc(1500px + var(--padding-screen-inline));
+  --white-primary: #FFFFFF;
+  --gray-secondary: #B3B3B3;
+  --text-gray: #666666;
+  --black-primary: #000000;
+  --orange-primary: #E5892B;
+  --font-primary: 'UltimaPro', sans-serif;
+  --font-secondary: 'nexa', sans-serif;
+  --error: #FFD9D9;
+  --error-foreground: #FF0000; 
+  --success: #DDFFDD;
+  --success-foreground: #008000;
+  --info: #DFF1FD;
+  --info-foreground: #007DD3;
+  --warning: #fdf7e7;
+  --warning-foreground: #F6C52B;
+}
+
+body{
+  min-height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  font-family: var(--font-primary);
+}
+
+.container { 
+  max-width: calc(var(--max-screen-width) + 1rem);
+  margin: 0 auto;
+  padding-inline: var(--padding-screen-inline);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo { 
+  width: 92px;
+  height: 92px;
+}
+
+.dropdown { 
+  position: relative;
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.dropdown button { 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--text-gray);
+  text-transform: uppercase;
+  
+  background: transparent;
+  border: none;
+}
+
+.dropdown button:hover {
+  color: var(--orange-primary);
+}
+
+.dropdown button:hover svg > * {
+  fill: var(--orange-primary);
+}
+
+.dropdown .dropdown-content {
+  position: absolute;
+
+  opacity: 0;
+  height: 0;
+  width: fit-content;
+  
+  cursor: pointer;
+  text-wrap: nowrap;
+  pointer-events: none;
+}
+
+.dropdown .dropdown-content > ul {
+  padding: 0.5rem;
+  
+  border: 1px solid var(--gray-secondary);
+  border-radius: 0.5rem;
+  
+  background-color: var(--white-primary);
+  box-shadow: 0px 1px 6px 1px #2C2C2C33;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown .dropdown-content:has(a:focus-visible)  {
+  display: block;
+  opacity: 1;
+  height: auto;
+  width: fit-content;
+  pointer-events: all;
+  /* transition: all 0.2s; */
+}
+
+.dropdown:hover .dropdown-content > ul {
+  animation: fade-in 0.2s both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    width: 0;
+    height: auto;
+    transform: translateY(-10px) scale(0.9);
+  }
+  50% {
+    width: max-content;
+  }
+  100% {
+    top: 100%;
+    opacity: 1;
+    height: auto;
+    transform: translateY(0px);
+  }
+}
+
+.dropdown[data-placement="top"] .dropdown-content {
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  padding-bottom: 0.5rem;
+}
+
+.dropdown[data-placement="right-bottom"] .dropdown-content {
+  top: 100%;
+  left: 100%;
+  padding-left: 0.5rem;
+}
+
+.dropdown[data-placement="bottom"] .dropdown-content {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 0.5rem;
+}
+
+.dropdown[data-placement="left-bottom"] .dropdown-content {
+  top: 100%;
+  right: 70%;
+  padding-top: 0.5rem;
+}
+
+.dropdown .dropdown-content li a {
+  display: block;
+  font-weight: 600;
+  font-size: inherit;
+  color: var(--text-gray);
+  text-decoration: none;
+  padding: 0.25rem;
+}
+
+.dropdown .dropdown-content li:hover a {
+  color: var(--orange-primary);
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.brand-wrapper { 
+  height: 100%;
+  width: 50%;
+  background: url(../img/bg-login.png) no-repeat center center;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.brand-wrapper .brand {
+  width: 100%; 
+  max-width: calc((var(--max-screen-width) + 1rem) / 2);
+  padding-inline: var(--padding-screen-inline);
+}
+
+.brand-wrapper .brand {
+  margin-left: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.brand-wrapper .brand img { 
+  width: 10.339375rem;
+  height: 6.290625rem;
+}
+
+.brand-wrapper .brand h2 {
+  color: var(--white-primary);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 1058px) {
+  .brand-wrapper .brand h2 > br {
+    display: none;
+  }
+}
+
+.login-wrapper { 
+  width: 50%;
+  height: 100%;
+  padding-inline: var(--padding-screen-inline);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: calc((var(--max-screen-width) + 1rem) / 2);
+}
+
+.login-wrapper .login {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.login-wrapper .login-form {
+  width: 100%;
+  max-width: 25rem;
+}
+
+.login-wrapper .login-form .login-no-account-description {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.form-group { 
+  display: flex;
+  flex-direction: column;
+  gap: 0.275rem;
+
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.form-group + .form-group { 
+  margin-top: 1.25rem;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 1rem;
+}
+
+.form-social-login h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.form-social-login h3::after,
+.form-social-login h3::before {
+  content: "";
+  flex-grow: 1;
+  border-bottom: 1px solid var(--gray-secondary);
+}
+
+.form-social-login-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  margin-top: 1.5rem
+}
+
+.form-social-login-list li {
+  width: 100%;
+}
+
+.button-google-provider {
+  border: 1px solid var(--gray-secondary);
+  color: var(--text-gray);
+
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.button-google-provider:hover {
+  border-color: var(--orange-primary);
+  color: var(--orange-primary);
+}
